@@ -1,0 +1,21 @@
+{
+  "id": "razen_microforge_aotd_patch",
+  "name": "Microforge AotD Patch",
+  "author": "Razenpok",
+  "utility": true,
+  "version": { "major": "1", "minor": "0", "patch": "0" },
+  "description": "Microforge patch for Ashes of the Domain - Theory of Toolbox.",
+  "gameVersion": "0.98a-RC8",
+  "dependencies": [
+    {
+      "id": "razen_microforge",
+      "name": "Microforge",
+      "version": "1.0.0"
+    },
+    {
+      "id": "aotd_theory_of_toolbox",
+      "name": "Ashes of the Domain - Theory of Toolbox",
+      "version": "1.0.11"
+    }
+  ]
+}

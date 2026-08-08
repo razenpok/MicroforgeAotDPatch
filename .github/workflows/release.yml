@@ -1,0 +1,33 @@
+on:
+  push:
+    tags:
+      - "*"
+
+name: Create Release
+
+env:
+  PROJECT_NAME: MicroforgeAotDPatch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Fetch Tags
+        run: git fetch --prune --unshallow --tags
+
+      - name: Set Variables
+        run: |
+          echo "VERSION=$(git describe --tags)" >> $GITHUB_ENV
+
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p artifacts
+          FILENAME="artifacts/$PROJECT_NAME-$VERSION.zip"
+          git archive --format=zip --prefix="$PROJECT_NAME/" --output="$FILENAME" HEAD
+          gh release create "$VERSION" "$FILENAME" --notes "Refer to [CHANGELOG.md](https://github.com/razenpok/$PROJECT_NAME/blob/main/CHANGELOG.md) for details."
